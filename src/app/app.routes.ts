@@ -5,6 +5,11 @@ import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
 import { NavbarComponent } from './features/ecommerce/components/navbar/navbar.component';
 import { HomeComponent } from './features/ecommerce/pages/home/home.component';
 import { ProductDetailComponent } from './features/ecommerce/components/product-detail/product-detail.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 
 
 export const routes: Routes = [
@@ -20,12 +25,18 @@ export const routes: Routes = [
         path: 'navbar',
         component: NavbarComponent
     },
-    {
-        path: 'home',
-        component: HomeComponent
+    {   path: 'home',
+        component: HomeComponent, 
+        canActivate: [AuthGuard, RoleGuard], 
+        data: { role: 'admin' }
     },
     {
-        path: 'product-detail',
-        component: ProductDetailComponent
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
     }
-]
+];

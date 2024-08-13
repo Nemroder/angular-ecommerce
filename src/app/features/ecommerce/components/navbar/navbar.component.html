@@ -4,14 +4,14 @@
     <i class="fas fa-bars"></i>
   </label>
   <label class="logo">YardSale</label>
-  <ul>
+  <ul class="ul-moduls">
     <li><a routerLink="/home" class="active" href="#">Home</a></li>
-    <li><a routerLink="">About</a></li>
+    <li><a routerLink="/users">Users</a></li>
     <li><a routerLink="">Services</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#">Feedback</a></li>
+    <li><a href="#">Feedback</a></li>
   </ul>
-
 
   <div class="flex items-center">
     <button class="p-2 border rounded relative" (click)="toogleSideMenu()">
@@ -32,10 +32,33 @@
         />
       </svg>
     </button>
-  </div>
 
+      <!-- User menu -->
+    <div class="relative ms-3">
+      <button class="p-2" (click)="toggleUserMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM12 14c-4.41 0-8 2.69-8 6v1h16v-1c0-3.31-3.59-6-8-6z"/>
+        </svg>
+      </button>
+      
+      <div class="user-menu absolute right-0 top-12 bg-white rounded shadow-lg w-48 hidden" [class.hidden]="!showUserMenu">
+        <ul>
+          <li>
+            <a routerLink="/user-management" class="px-4 py-2 text-black hover:bg-blue-600">Gestión de usuario</a>
+          </li>
+          <li>
+            <!-- Otros elementos del navbar -->
+            <button (click)="logout()">Logout</button>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </nav>
 
+<!-- My cart section -->
 <div
   class="cart fixed border-l-4 top-0 right-0 bg-red z-40 w-72 h-screen p-4 overflow-y-auto transition-transform bg-black" [class.translate-x-full]="hideSideMenu()"
 >
@@ -73,4 +96,5 @@
 
     <button class="text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 font-medium text-sm py-3.5 w-full">Checkout</button>
   </div>
+
 </div>

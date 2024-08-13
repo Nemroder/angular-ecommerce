@@ -1,31 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private USERS_KEY = 'users';
-
-  getUsers(): Observable<User[]> {
-    const users: User[] = JSON.parse(localStorage.getItem(this.USERS_KEY) || '[]');
-    return of(users);
+  constructor() {
+    this.loadInitialUsers();
   }
 
-  addUser(newUser: User): Observable<void> {
-    return this.getUsers().pipe(
-      map((users: User[]) => {
-        users.push(newUser);
-        localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
-      })
-    );
-  }
-
-  initializeUsers(users: User[]): void {
-    if (!localStorage.getItem(this.USERS_KEY)) {
-      localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+  private loadInitialUsers() {
+    if (!localStorage.getItem('users')) {
+      const initialUsers: User[] = [
+        { username: 'admin', password: 'admin', role: 'admin', isActive: true },
+        { username: 'supervisor', password: 'supervisor', role: 'supervisor', isActive: true },
+        { username: 'agent', password: 'agent', role: 'agente', isActive: true },
+        { username: 'client', password: 'client', role: 'cliente', isActive: true }
+      ];
+      localStorage.setItem('users', JSON.stringify(initialUsers));
     }
+  }  
+
+  addUser(user: User): boolean {
+    const storedUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const userExists = storedUsers.some(existingUser => existingUser.username === user.username);
+
+    if (userExists) {
+      return false;
+    }
+
+    storedUsers.push(user);
+    localStorage.setItem('users', JSON.stringify(storedUsers));
+    return true;
+  }
+
+  getUsers(): User[] {
+    return JSON.parse(localStorage.getItem('users') || '[]');
   }
 }

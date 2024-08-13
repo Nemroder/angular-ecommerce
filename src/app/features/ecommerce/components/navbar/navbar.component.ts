@@ -2,7 +2,7 @@ import { Component, Input, signal, SimpleChange, SimpleChanges } from '@angular/
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../../shared/models/product.model';
 import { RouterLinkWithHref } from '@angular/router';
-
+import { AuthService } from '../../../../core/services/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -11,13 +11,22 @@ import { RouterLinkWithHref } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  hideSideMenu = signal(true);
   @Input({required: true}) cart: Product[] = [];
+  
+  hideSideMenu = signal(true);
   total = signal(0);
+  showUserMenu = false;
+  constructor(private authService: AuthService) {}
+
 
   toogleSideMenu() {
     this.hideSideMenu.update(prevState => !prevState);
   }
+
+  toggleUserMenu() {
+    this.showUserMenu = !this.showUserMenu;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const cart = changes['cart'];
     if (cart) {
@@ -27,5 +36,9 @@ export class NavbarComponent {
 
   calcTotal() {
     return this.cart.reduce((total, product) => total + product.price, 0);
+  }
+
+  logout() {
+    this.authService.logout(); // Llama al método de logout del AuthService
   }
 }

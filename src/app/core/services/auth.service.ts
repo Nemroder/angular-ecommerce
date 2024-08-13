@@ -1,37 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { UserService } from './user.service';
-import { User } from '../models/user.model';
+import { Router } from '@angular/router';
+import { UserService } from '../../core/services/user.service';
+import { User } from '../../core/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private userService: UserService) {}
+  private authStatus = false;
 
-  login(username: string, password: string): Observable<User> {
-    return this.userService.getUsers().pipe(
-      map((users: User[]) => {
-        const user = users.find(u => u.username === username && u.password === password);
-        if (user && user.isActive) {
-          localStorage.setItem('loggedInUser', JSON.stringify(user));
-          return user;
-        } else {
-          throw new Error('Invalid credentials or user is blocked.');
-        }
-      }),
-      catchError(err => {
-        return throwError(() => new Error(err.message));
-      })
-    );
+  constructor(private router: Router, private userService: UserService) {}
+
+  login(username: string, password: string, rememberMe: boolean): string | null {
+    const storedUsers = this.userService.getUsers();
+    const user = storedUsers.find((user: User) => user.username === username && user.password === password);
+  
+    if (user) {
+      if (!user.isActive) {
+        return 'Este usuario está bloqueado.';
+      }
+  
+      localStorage.setItem('loggedUser', JSON.stringify(user));
+  
+      if (rememberMe) {
+        localStorage.setItem('rememberMe', JSON.stringify(true));
+      } else {
+        localStorage.removeItem('rememberMe');
+      }
+  
+      this.authStatus = true;
+  
+      // Redirigir a la página principal
+      this.router.navigate(['/home']).then(() => {
+        console.log('Redirección exitosa');
+      }).catch(error => {
+        console.error('Error en la redirección:', error);
+      });
+  
+      return null;
+    } else {
+      return 'Credenciales inválidas.';
+    }
+  }  
+
+  logout() {
+    localStorage.removeItem('loggedUser');
+    this.authStatus = false;
+    this.router.navigate(['/login']);
   }
 
-  logout(): void {
-    localStorage.removeItem('loggedInUser');
+  getLoggedUser(): User | null {
+    const user = localStorage.getItem('loggedUser');
+    return user ? JSON.parse(user) : null;
   }
 
-  getLoggedInUser(): User | null {
-    return JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  isAuthenticated(): boolean {
+    return this.authStatus;
   }
 }

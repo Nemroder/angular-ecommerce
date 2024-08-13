@@ -39,7 +39,7 @@
   nav ul{
     justify-content: center;
   }
-  nav ul li{
+  .ul-moduls li{
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
@@ -82,39 +82,45 @@
   button {
     padding: 6px 0;
   }
+
   #check{
     display: none;
   }
+
+
+  
   @media (max-width: 952px){
     label.logo{
       font-size: 30px;
     }
+    .ul-moduls ul {
+      width: 40vw;
+    }
     nav ul li a{
       font-size: 16px;
+      padding-left: 24px;
     }
   }
   @media (max-width: 858px){
     .checkbtn{
       display: block;
     }
-    ul{
+    .ul-moduls{
       position: fixed;
-      width: 100%;
+      width: 40vw;
       height: 100vh;
-      background: #2c3e50;
+      background: var(--black);
       top: 80px;
       left: -100%;
       text-align: center;
       transition: all .5s;
     }
-    nav ul li{
+    .ul-moduls li{
       display: block;
-      margin: 50px 0;
+      margin: 20px 0;
       line-height: 30px;
     }
-    nav ul li a{
-      font-size: 20px;
-    }
+    
     #check:checked ~ ul{
       left: 0;
     }

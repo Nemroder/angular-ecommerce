@@ -1,6 +1,6 @@
 export interface User {
     username: string;
     password: string;
-    role: 'Administrador' | 'Supervisor' | 'Agente' | 'Cliente';
+    role: 'admin' | 'supervisor' | 'agente' | 'cliente';
     isActive: boolean;
   }  
