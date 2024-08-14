@@ -51,3 +51,45 @@ a {
     margin: auto;
     width: 50%;
 }
+
+
+/* notifications */
+
+.notification {
+    font-weight: 700;
+    border-radius: 5px;
+    color: white;
+    margin: 12px 0 0;
+}
+  
+.success {
+    color: green;
+}
+  
+.error {
+    color: red;}
+  
+.info {
+    background-color: blue;
+
+}
+  
+.top {
+    top: 10px;
+    right: 10px;
+}
+  
+.bottom {
+    bottom: 10px;
+    right: 10px;
+}
+  
+.left {
+    top: 10px;
+    left: 10px;
+}
+  
+.right {
+    top: 10px;
+    right: 10px;
+}

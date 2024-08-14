@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 
+export interface Notification {
+  type: string;
+  position: string; 
+  text: string; 
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  private notifications: string[] = [];
+  private notifications: Notification[] = [];
 
-  addNotification(message: string) {
-    this.notifications.push(message);
+  getNotifications(): Notification[] {
+    return this.notifications;
   }
 
-  getNotifications() {
-    return this.notifications;
+  addNotification(notification: Notification) {
+    this.notifications.push(notification);
   }
 
   clearNotifications() {

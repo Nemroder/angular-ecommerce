@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLinkWithHref, Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
-import { Router } from '@angular/router';
 
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationService, Notification } from '../../../core/services/notification.service';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -19,8 +18,8 @@ export class SignUpComponent {
   password: string = '';
   confirmPassword: string = '';
   showPassword: boolean = false;
-  successMessage: string = '';
-  errorMessage: string = '';
+  
+  notifications: Notification[] = [];
 
   constructor(
     private userService: UserService,
@@ -28,27 +27,48 @@ export class SignUpComponent {
     private notificationService: NotificationService
   ) {}
 
+  ngOnInit() {
+    this.notifications = this.notificationService.getNotifications(); // Obtener notificaciones existentes
+  }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   onSubmit() {
-    if (!this.username || this.username.trim() === '') {
-      this.notificationService.addNotification('Username cannot be empty!');
+    if (!this.username.trim()) {
+      this.notificationService.addNotification({
+        type: 'error',
+        position: 'top',
+        text: 'Username cannot be empty!'
+      });
       return;
     }
-    if (!this.password || this.password.trim() === '') {
-      this.notificationService.addNotification('Password cannot be empty!');
+    if (!this.password.trim()) {
+      this.notificationService.addNotification({
+        type: 'error',
+        position: 'top',
+        text: 'Password cannot be empty!'
+      });
       return;
     }
-    if (!this.confirmPassword || this.confirmPassword.trim() === '') {
-      this.notificationService.addNotification('Confirm Password cannot be empty!');
+    if (!this.confirmPassword.trim()) {
+      this.notificationService.addNotification({
+        type: 'error',
+        position: 'top',
+        text: 'Confirm Password cannot be empty!'
+      });
       return;
     }
     if (this.password !== this.confirmPassword) {
-      this.notificationService.addNotification('Passwords do not match!');
+      this.notificationService.addNotification({
+        type: 'error',
+        position: 'top',
+        text: 'Passwords do not match!'
+      });
       return;
     }
+
 
     const newUser: User = {
       username: this.username,
@@ -57,17 +77,24 @@ export class SignUpComponent {
       isActive: true
     };
 
-    if (this.userService.addUser(newUser)) {
-      this.notificationService.addNotification('User has been created successfully!');
+     if (this.userService.addUser(newUser)) {
+      this.notificationService.addNotification({
+        type: '',
+        position: '',
+        text: ''
+      });
       this.router.navigate(['/login'], { queryParams: { message: 'User has been created successfully!' } });
     } else {
-      this.notificationService.addNotification('User already exists!');
+      this.notificationService.addNotification({
+        type: 'error',
+        position: 'top',
+        text: 'User already exists!'
+      });
     }
   }
 
-  users: User[] = [];
-
-  ngOnInit() {
-    this.users = this.userService.getUsers();
+  // Método para obtener las clases CSS basadas en el tipo de notificación
+  getNotificationClasses(notification: Notification): string {
+    return `notification ${notification.type}`;
   }
 }
