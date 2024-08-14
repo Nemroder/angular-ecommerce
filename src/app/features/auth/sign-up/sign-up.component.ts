@@ -6,8 +6,7 @@ import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
 import { Router } from '@angular/router';
 
-
-
+import { NotificationService } from '../../../core/services/notification.service';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -23,7 +22,11 @@ export class SignUpComponent {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -31,19 +34,19 @@ export class SignUpComponent {
 
   onSubmit() {
     if (!this.username || this.username.trim() === '') {
-      this.errorMessage = 'Username cannot be empty!';
+      this.notificationService.addNotification('Username cannot be empty!');
       return;
     }
     if (!this.password || this.password.trim() === '') {
-      this.errorMessage = 'Password cannot be empty!';
+      this.notificationService.addNotification('Password cannot be empty!');
       return;
     }
     if (!this.confirmPassword || this.confirmPassword.trim() === '') {
-      this.errorMessage = 'Confirm Password cannot be empty!';
+      this.notificationService.addNotification('Confirm Password cannot be empty!');
       return;
     }
     if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match!';
+      this.notificationService.addNotification('Passwords do not match!');
       return;
     }
 
@@ -55,12 +58,12 @@ export class SignUpComponent {
     };
 
     if (this.userService.addUser(newUser)) {
+      this.notificationService.addNotification('User has been created successfully!');
       this.router.navigate(['/login'], { queryParams: { message: 'User has been created successfully!' } });
     } else {
-      this.errorMessage = 'User already exists!';
+      this.notificationService.addNotification('User already exists!');
     }
   }
-
 
   users: User[] = [];
 
