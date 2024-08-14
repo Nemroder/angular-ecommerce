@@ -1,5 +1,7 @@
+// notification.component.ts
 import { Component, OnInit } from '@angular/core';
 import { NotificationService, Notification } from '../../core/services/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-notification',
@@ -8,12 +10,12 @@ import { NotificationService, Notification } from '../../core/services/notificat
   standalone: true,
 })
 export class NotificationComponent implements OnInit {
-  notifications: Notification[] = [];
+  notifications$: Observable<Notification[]>;
 
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.notifications = this.notificationService.getNotifications();
+    this.notifications$ = this.notificationService.getNotifications();
   }
 
   getNotificationClasses(notification: Notification) {

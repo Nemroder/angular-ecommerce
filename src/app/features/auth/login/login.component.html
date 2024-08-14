@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div *ngFor="let notification of notifications" [ngClass]="getNotificationClasses(notification)">
+      <div *ngFor="let notification of notifications$ | async" [ngClass]="getNotificationClasses(notification)">
         {{ notification.text }}
       </div>
 
