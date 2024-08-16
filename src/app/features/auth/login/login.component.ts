@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLinkWithHref } from '@angular/router';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLinkWithHref, Router, ActivatedRoute } from '@angular/router';
+
+import { NotificationComponent } from '../../notification/notification.component';
+import { AuthService } from '../../../core/services/auth.service';
 import { NotificationService, Notification } from '../../../core/services/notification.service';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, RouterLinkWithHref, FormsModule],
+  imports: [CommonModule, RouterLinkWithHref, FormsModule, NotificationComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,

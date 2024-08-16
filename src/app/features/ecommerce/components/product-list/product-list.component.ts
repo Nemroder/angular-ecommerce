@@ -11,11 +11,10 @@ import { Product } from '../../../../shared/models/product.model';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
-  @Input({required: true}) product!: Product;
+  @Input() product!: Product;
+  @Output() addToCart = new EventEmitter<Product>();
 
-  @Output() addToCart = new EventEmitter();
-
-  addToCartHandler() {
+  addToCartHandler(): void {
     this.addToCart.emit(this.product);
   }
 }

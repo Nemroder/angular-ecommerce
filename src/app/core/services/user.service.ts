@@ -37,4 +37,13 @@ export class UserService {
   getUsers(): User[] {
     return JSON.parse(localStorage.getItem('users') || '[]');
   }
+  updateUser(updatedUser: User): void {
+    const storedUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const userIndex = storedUsers.findIndex(user => user.username === updatedUser.username);
+
+    if (userIndex !== -1) {
+      storedUsers[userIndex] = updatedUser;
+      localStorage.setItem('users', JSON.stringify(storedUsers));
+    }
+  }
 }

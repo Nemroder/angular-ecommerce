@@ -1,13 +1,13 @@
 <div class="home-container">
 
-    <app-navbar [cart]="cart()" class="home-navbar"></app-navbar>
+    <app-navbar></app-navbar>
     <div class="container mx-auto">
         
         <div class="grid grid-cols-4 gap-4">
             <app-product-list
-                *ngFor="let product of products()"
+                *ngFor="let product of products"
                 [product]="product"
-                (addToCart)="addtoCart($event)" />
+                (addToCart)="addToCart($event)" />
         </div>
     </div>
 </div>

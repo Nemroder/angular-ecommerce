@@ -4,12 +4,9 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
 import { NavbarComponent } from './features/ecommerce/components/navbar/navbar.component';
 import { HomeComponent } from './features/ecommerce/pages/home/home.component';
-import { ProductDetailComponent } from './features/ecommerce/components/product-detail/product-detail.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
+import { UserComponent } from './features/ecommerce/pages/user/user.component';
 
 
 export const routes: Routes = [
@@ -27,8 +24,13 @@ export const routes: Routes = [
     },
     {   path: 'home',
         component: HomeComponent, 
-        canActivate: [AuthGuard, RoleGuard], 
-        data: { role: 'admin' }
+        // canActivate: [AuthGuard, RoleGuard], 
+        // data: { role: 'admin' }
+    },
+    {   path: 'user',
+        component: UserComponent, 
+        // canActivate: [AuthGuard, RoleGuard], 
+        // data: { role: 'admin' }
     },
     {
         path: '',

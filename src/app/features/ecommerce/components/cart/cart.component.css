@@ -1,0 +1,20 @@
+  .cart {
+    padding-top: 7px;
+  }
+  .myCartTittle {
+    margin-bottom: 48px;
+  }
+  .product-render {
+    display: flex;
+    justify-content: space-between;
+  }
+  .product-cart {
+    min-width: 100px;
+  }
+  .total-price {
+    display: flex;
+    justify-content: space-between;
+  }
+  .checkout-button {
+    padding: 6px 0;
+  }

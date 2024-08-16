@@ -1,0 +1,95 @@
+<button class="p-2 border rounded relative" (click)="toggleSideMenu()">
+    <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">{{cart.length}}</div>
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2.5"
+      stroke="white"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+      />
+    </svg>
+</button>
+
+<!-- My cart section -->
+<div class="cart fixed border-l-4 top-0 right-0 bg-red z-40 w-72 h-screen p-4 overflow-y-auto transition-transform bg-black" 
+  [class.translate-x-full]="hideSideMenu">
+  <div class="flex justify-between items-center myCartTittle">
+    <p class="text-xl text-white stroke-linejoin">My Cart</p>
+    <button (click)="toggleSideMenu()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="white"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="w-full">
+    <div *ngFor="let product of cart" class="product-render mb-4">
+      <img [src]="product.image" class="rounded-lg w-24">
+
+      <div class="product-cart">
+
+        <div class="flex justify-end">
+          <button class="text-red-500 ml-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mb-2">
+          <p class="text-white cart-title">{{product.title}}</p>
+          <p class="text-white">${{ product.price }}</p>
+        </div>
+
+        <div class="flex justify-between items-center space-x-2">
+          <button class="text-white px-2 bg-gray-700 rounded">
+            -
+          </button>
+          <span class="text-white"></span>
+          <button class="text-white px-2 bg-gray-700 rounded">
+            +
+          </button>
+        </div>
+  
+      </div>
+    </div>
+
+
+    <div class="total-price">
+      <p class="text-white mb-2">Total:</p>
+      <p class="text-white mb-2">$ {{ total }}</p>
+    </div>
+
+    <button class="checkout-button text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 font-medium text-sm py-3.5 w-full">Checkout</button>
+  </div>
+
+</div>
