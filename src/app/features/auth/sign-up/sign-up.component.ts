@@ -1,49 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLinkWithHref, Router } from '@angular/router';
-import { UserService } from '../../../core/services/user.service';
+import { Observable } from 'rxjs';
+
+import { UserService} from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
 
+import { NotificationComponent } from '../../notification/notification.component';
 import { NotificationService, Notification } from '../../../core/services/notification.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, RouterLinkWithHref, FormsModule],
+  imports: [CommonModule, RouterLinkWithHref, FormsModule, NotificationComponent],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
   showPassword: boolean = false;
 
-  notifications: Notification[] = [];
-  private subscription: Subscription | null = null;
+  notifications$: Observable<Notification[]>;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private notificationService: NotificationService
-  ) {}
-
-  ngOnInit() {
-    this.subscription = this.notificationService.getNotifications().subscribe(notifications => {
-      this.notifications = notifications;
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
+  ) {
+    this.notifications$ = this.notificationService.getNotifications(); // Obtener las notificaciones
   }
 
   onSubmit() {
@@ -98,8 +85,7 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  // Método para obtener las clases CSS basadas en el tipo de notificación
-  getNotificationClasses(notification: Notification): string {
-    return `notification ${notification.type}`;
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

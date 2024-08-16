@@ -6,8 +6,6 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { UserTableComponent } from '../../components/user-table/user-table.component';
 import { User } from '../../../../core/models/user.model';
 import { UserService } from '../../../../core/services/user.service';
-import { Product } from '../../../../shared/models/product.model';
-
 @Component({
   selector: 'app-user',
   standalone: true,

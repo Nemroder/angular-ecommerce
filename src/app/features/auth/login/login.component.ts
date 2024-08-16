@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLinkWithHref, Router, ActivatedRoute } from '@angular/router';
+import { RouterLinkWithHref, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { NotificationComponent } from '../../notification/notification.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { NotificationService, Notification } from '../../../core/services/notification.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -25,30 +25,17 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
     private notificationService: NotificationService
   ) {
     this.notifications$ = this.notificationService.getNotifications(); // Obtener las notificaciones
   }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['message']) {
-        this.notificationService.addNotification({
-          type: 'success',
-          position: 'top',
-          text: params['message'],
-        });
-      }
-    });
-  }
-
   login() {
     if (!this.username.trim() || !this.password.trim()) {
       this.notificationService.addNotification({
         type: 'error',
-        position: 'top',
+        position: 'left',
         text: 'Please complete all fields.',
       });
       return;
@@ -69,9 +56,5 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
-  }
-
-  getNotificationClasses(notification: Notification): string {
-    return `notification ${notification.type}`;
   }
 }

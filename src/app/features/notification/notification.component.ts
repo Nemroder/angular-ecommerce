@@ -1,6 +1,8 @@
 // notification.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
 
 import { NotificationService, Notification } from '../../core/services/notification.service';
 import { Observable } from 'rxjs';
@@ -15,15 +17,11 @@ import { Observable } from 'rxjs';
 export class NotificationComponent implements OnInit {
   notifications$: Observable<Notification[]>;
 
-  constructor(
-    private notificationService: NotificationService
-  ) {
-    this.notifications$ = this.notificationService.getNotifications(); // Obtener las notificaciones
-  }
-  
-  ngOnInit() {
+  constructor(private notificationService: NotificationService) {
     this.notifications$ = this.notificationService.getNotifications();
   }
+
+  ngOnInit() {}
 
   getNotificationClasses(notification: Notification) {
     return {
