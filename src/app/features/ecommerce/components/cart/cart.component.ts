@@ -31,4 +31,8 @@ export class CartComponent {
   calculateTotal(): number {
     return this.cart.reduce((total, product) => total + product.price, 0);
   }
+
+  deleteProduct(productId: number): void {
+    this.cartService.deleteProduct(productId);
+  }
 }

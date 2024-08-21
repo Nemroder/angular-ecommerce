@@ -35,4 +35,11 @@ export class CartService {
     this.cartSubject.next([]);
     this.saveCart([]);
   }
+
+  deleteProduct(productId: number): void {
+    const currentCart = this.cartSubject.value;
+    const updatedCart = currentCart.filter(product => product.id !== productId);
+    this.cartSubject.next(updatedCart);
+    this.saveCart(updatedCart);
+  }
 }

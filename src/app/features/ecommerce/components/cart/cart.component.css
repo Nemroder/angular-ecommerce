@@ -1,8 +1,15 @@
   .cart {
     padding-top: 7px;
   }
+  .pCardTittle {
+    color: white;
+    font-size: 17px;
+    padding: 7px 0 0;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
   .myCartTittle {
-    margin-bottom: 48px;
+    margin-bottom: 44px;
   }
   .product-render {
     display: flex;

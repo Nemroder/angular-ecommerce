@@ -7,6 +7,8 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
+  private nextId = 1;
+
     private productsSubject = new BehaviorSubject<Product[]>([]);
     products$ = this.productsSubject.asObservable();
   
@@ -14,11 +16,9 @@ export class ProductService {
     cart$ = this.cartSubject.asObservable();
 
   constructor() {
-    // Inicializa los productos aquí (puedes cargar de una API o de un archivo)
     const initProducts: Product[] = [
-      { id: Date.now(), title: 'Pro 1', price: 100, image: 'https://picsum.photos/640/640?r=23', creationAt: new Date().toISOString() },
-      { id: Date.now(), title: 'Pro 2', price: 100, image: 'https://picsum.photos/640/640?r=12', creationAt: new Date().toISOString() },
-      // Agrega más productos si es necesario
+      { id: this.nextId++, title: 'Pro 1', price: 100, image: 'https://picsum.photos/640/640?r=23', creationAt: new Date().toISOString() },
+      { id: this.nextId++, title: 'Pro 2', price: 100, image: 'https://picsum.photos/640/640?r=12', creationAt: new Date().toISOString() },
     ];
     this.productsSubject.next(initProducts);
   }
