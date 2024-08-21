@@ -5,8 +5,8 @@
   <app-user-table 
     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
     [users]="users" 
-    (deleteUser)="handleDeleteUser($event)" 
-    (editUser)="handleEditUser($event)">
+    (deleteUser)="deleteModal($event)" 
+    (editUser)="editForm($event)">
   </app-user-table>
 </div>
 
@@ -15,7 +15,7 @@
   <div class="bg-white sm:rounded-lg p-6 dark:bg-gray-800 w-full max-w-md">
     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Edit User</h3>
 
-    <form (ngSubmit)="confirmSave()" class="space-y-4">
+    <form (ngSubmit)="openEditConfirmModal()" class="space-y-4">
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Username:
@@ -74,7 +74,7 @@
         </button>
         <button 
           type="button" 
-          (click)="cancelEdit()"
+          (click)="closeEditForm()"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
           Cancel
         </button>
@@ -85,20 +85,20 @@
 </div>
 
 <!-- Modal de edicion -->
-<div *ngIf="showConfirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div *ngIf="showEditConfirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white p-6 sm:rounded-lg dark:bg-gray-800 w-full max-w-md">
     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Confirmar Guardado</h3>
     <p class="text-gray-700 dark:text-gray-300 mb-4">¿Estás seguro de que deseas guardar los cambios?</p>
     <div class="flex justify-end space-x-2">
       
       <button 
-        (click)="saveUser()"
+        (click)="confirmSave()"
         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-indigo-700 shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600">
         Confirmar
       </button>
 
       <button 
-        (click)="closeConfirmModal()"
+        (click)="closeEditConfirmModal()"
         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
         Cancelar
       </button>

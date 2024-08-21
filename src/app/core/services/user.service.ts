@@ -54,4 +54,11 @@ export class UserService {
       localStorage.setItem('users', JSON.stringify(storedUsers));
     }
   }
+
+  deleteUser(id: number): void {
+    let storedUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    storedUsers = storedUsers.filter(user => user.id !== id);
+    localStorage.setItem('users', JSON.stringify(storedUsers));
+  }
+  
 }
