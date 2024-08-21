@@ -28,8 +28,20 @@ export class CartComponent {
     this.hideSideMenu = !this.hideSideMenu;
   }
 
+  getTotalQuantity(): number {
+    return this.cart.reduce((total, product) => total + (product.quantity || 1), 0);
+  }  
+
   calculateTotal(): number {
-    return this.cart.reduce((total, product) => total + product.price, 0);
+    return this.cart.reduce((total, product) => total + (product.price * (product.quantity || 1)), 0);
+  }
+
+  increaseQuantity(productId: number): void {
+    this.cartService.increaseQuantity(productId);
+  }
+
+  decreaseQuantity(productId: number): void {
+    this.cartService.decreaseQuantity(productId);
   }
 
   deleteProduct(productId: number): void {

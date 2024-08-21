@@ -4,4 +4,5 @@ export interface Product {
     price: number;
     image: string;
     creationAt: string;
+    quantity?: number; // Optional
 }
