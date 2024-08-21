@@ -68,6 +68,7 @@ export class SignUpComponent {
     }
 
     const newUser: User = {
+      id: 0,
       username: this.username,
       password: this.password,
       role: 'cliente',

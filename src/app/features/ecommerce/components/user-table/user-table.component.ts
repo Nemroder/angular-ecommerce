@@ -12,11 +12,11 @@ import { User } from '../../../../core/models/user.model';
 })
 export class UserTableComponent {
   @Input() users: User[] = [];
-  @Output() deleteUser = new EventEmitter<string>();
+  @Output() deleteUser = new EventEmitter<number>();
   @Output() editUser = new EventEmitter<User>();
 
-  onDeleteUser(username: string): void {
-      this.deleteUser.emit(username);
+  onDeleteUser(id: number): void {
+      this.deleteUser.emit(id);
   }
 
   onEditUser(user: User): void {
