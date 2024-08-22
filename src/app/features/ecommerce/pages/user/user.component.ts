@@ -28,8 +28,7 @@ export class UserComponent {
   showAssignAgentModal = false;
 
   userIdToDelete: number | null = null;
-  supervisorIdToAssign: number | null = null;
-
+  supervisorIdToAssign: number = 0;
 
   constructor(
     private userService: UserService, 
@@ -53,6 +52,7 @@ export class UserComponent {
 
   closeAssignAgentModal(): void {
     this.showAssignAgentModal = false;
+    console.log (this.showAssignAgentModal);
   }
 
   onAssignAgent(agentId: number): void {
@@ -60,6 +60,8 @@ export class UserComponent {
       this.userService.assignAgent(agentId, this.supervisorIdToAssign);
       this.loadUsers();  // Recargamos la lista de usuarios después de la asignación
       this.closeAssignAgentModal();
+      console.log (this.showAssignAgentModal);
+
     }
   }
 

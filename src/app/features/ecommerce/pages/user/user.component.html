@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="relative overflow-x-auto sm:rounded-lg my-4 p-4">
-  <h2 class="text-xl font-semibold text-gray-900 dark:text-white">User Management</h2>
+<div class="relative overflow-x-auto sm:rounded-lg my-4">
   <app-user-table 
     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
     [users]="users" 
@@ -87,7 +86,7 @@
 
 <!-- Modal de Asignación de Agente -->
 <app-assign-agent-modal
-  *ngIf="supervisorIdToAssign !== null"
+  *ngIf="showAssignAgentModal"
   [supervisorId]="supervisorIdToAssign"
   [agents]="agents"
   (close)="closeAssignAgentModal()"

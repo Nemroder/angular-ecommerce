@@ -1,6 +1,9 @@
-<div class="relative">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-gray-200 dark:border-gray-700 pb-2 text-center">
+    User Management
+</h2>
+<div class="relative div-user-table">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Id
@@ -14,7 +17,7 @@
                 <th scope="col" class="px-6 py-3">
                     Active
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 w-48">
                     Actions
                 </th>
             </tr>
@@ -34,24 +37,24 @@
                 <td class="px-6 py-4">
                     {{ user.isActive ? 'Yes' : 'No' }}
                 </td>
-                <td class="px-4 py-4 max-w-xs">
-                    <div class="flex space-x-2">
+                <td class="px-6 py-4 w-48">
+                    <div class="flex space-x-1">
                         <button 
                             (click)="onEditUser(user)" 
-                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2 py-1 rounded border border-blue-600 dark:border-blue-500">
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2 py-1 rounded border border-blue-600 dark:border-blue-500 text-m">
                             Edit
                         </button>
                         <button 
                             (click)="onDeleteUser(user.id)" 
-                            class="font-medium text-red-600 dark:text-red-500 hover:underline px-2 py-1 rounded border border-red-600 dark:border-red-500">
+                            class="font-medium text-red-600 dark:text-red-500 hover:underline px-2 py-1 rounded border border-red-600 dark:border-red-500 text-m">
                             Delete
                         </button>
                         <button 
                             *ngIf="currentUserRole === 'admin' && user.role === 'supervisor'" 
                             (click)="onAssignAgent(user.id)" 
-                            class="font-medium text-green-600 dark:text-green-500 hover:underline px-2 py-1 rounded border border-green-600 dark:border-green-500">
+                            class="font-medium text-green-600 dark:text-green-500 hover:underline px-2 py-1 rounded border border-green-600 dark:border-green-500 text-m">
                             Assign Agent
-                    </button>
+                        </button>
                     </div>
                 </td>                
             </tr>

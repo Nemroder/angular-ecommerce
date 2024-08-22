@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NotificationService } from './core/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +9,6 @@ import { NotificationService } from './core/services/notification.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(private notificationService: NotificationService) {}
+  constructor() {}
 
 }

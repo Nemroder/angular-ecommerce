@@ -1,4 +1,7 @@
-/* user.component.css */
+
+.div-user-table {
+    padding: 0 12rem;
+}
 .fixed {
     position: fixed;
   }
