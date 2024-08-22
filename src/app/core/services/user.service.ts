@@ -79,4 +79,9 @@ export class UserService {
       this.updateUser(agent);
     }
   }
+
+  getLoggedUser(): User | null {
+    const user = localStorage.getItem('loggedUser');
+    return user ? JSON.parse(user) : null;
+  }
 }

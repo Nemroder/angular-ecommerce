@@ -6,7 +6,8 @@
     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
     [users]="users" 
     (deleteUser)="deleteModal($event)" 
-    (editUser)="editForm($event)">
+    (editUser)="editForm($event)"
+    (assignAgent)="openAssignAgentModal($event)">
   </app-user-table>
 </div>
 
@@ -83,6 +84,15 @@
     </form>
   </div>
 </div>
+
+<!-- Modal de Asignación de Agente -->
+<app-assign-agent-modal
+  *ngIf="supervisorIdToAssign !== null"
+  [supervisorId]="supervisorIdToAssign"
+  [agents]="agents"
+  (close)="closeAssignAgentModal()"
+  (assign)="onAssignAgent($event)">
+</app-assign-agent-modal>
 
 <!-- Modal de edicion -->
 <div *ngIf="showEditConfirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

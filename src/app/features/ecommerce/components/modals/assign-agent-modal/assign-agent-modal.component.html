@@ -1,1 +1,14 @@
-<p>assign-agent-modal works!</p>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white sm:rounded-lg p-6 dark:bg-gray-800 w-full max-w-md">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Assign Agent</h3>
+      <select [(ngModel)]="selectedAgentId" class="w-full mb-4">
+        <option *ngFor="let agent of agents" [value]="agent.id">
+          {{ agent.username }}
+        </option>
+      </select>
+      <div class="flex justify-end space-x-2">
+        <button (click)="onAssign()" class="px-4 py-2 bg-blue-700 text-white rounded">Assign</button>
+        <button (click)="onClose()" class="px-4 py-2 bg-gray-500 text-white rounded">Cancel</button>
+      </div>
+    </div>
+  </div>  

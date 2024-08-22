@@ -12,14 +12,28 @@ import { User } from '../../../../core/models/user.model';
 })
 export class UserTableComponent {
   @Input() users: User[] = [];
-  @Output() deleteUser = new EventEmitter<number>();
+  @Output() assignAgent = new EventEmitter<number>();
   @Output() editUser = new EventEmitter<User>();
+  @Output() deleteUser = new EventEmitter<number>();
 
-  onDeleteUser(id: number): void {
-      this.deleteUser.emit(id);
+  currentUserRole: string | null = null;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    const loggedUser = this.userService.getLoggedUser();
+    this.currentUserRole = loggedUser ? loggedUser.role : null;
+  }
+
+  onAssignAgent(userId: number) {
+    this.assignAgent.emit(userId);
   }
 
   onEditUser(user: User): void {
-      this.editUser.emit(user);
+    this.editUser.emit(user);
+  }
+  
+  onDeleteUser(id: number): void {
+      this.deleteUser.emit(id);
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { UserTableComponent } from '../../components/user-table/user-table.component';
+import { AssignAgentModalComponent } from '../../components/modals/assign-agent-modal/assign-agent-modal.component';
 import { User } from '../../../../core/models/user.model';
 
 import { UserService } from '../../../../core/services/user.service';
@@ -12,16 +13,23 @@ import { NotificationService } from '../../../../core/services/notification.serv
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, UserTableComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, UserTableComponent, FormsModule, AssignAgentModalComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
   users: User[] = [];
+  supervisors: User[] = [];
+  agents: User[] = [];
   currentUser: User | null = null;
+
   showEditConfirmModal = false;
   showDeleteConfirmModal = false;
+  showAssignAgentModal = false;
+
   userIdToDelete: number | null = null;
+  supervisorIdToAssign: number | null = null;
+
 
   constructor(
     private userService: UserService, 
@@ -33,7 +41,29 @@ export class UserComponent {
    // Cargar usuarios desde el servicio
   loadUsers(): void {
     this.users = this.userService.getUsers();
+    this.supervisors = this.users.filter(user => user.role === 'supervisor');
+    this.agents = this.users.filter(user => user.role === 'agente');
   }
+
+  // assign-modal
+  openAssignAgentModal(supervisorId: number): void {
+    this.supervisorIdToAssign = supervisorId;
+    this.showAssignAgentModal = true;
+  }
+
+  closeAssignAgentModal(): void {
+    this.showAssignAgentModal = false;
+  }
+
+  onAssignAgent(agentId: number): void {
+    if (this.supervisorIdToAssign !== null) {
+      this.userService.assignAgent(agentId, this.supervisorIdToAssign);
+      this.loadUsers();  // Recargamos la lista de usuarios después de la asignación
+      this.closeAssignAgentModal();
+    }
+  }
+
+  // edit-form
 
   editForm(user: User): void {
     this.currentUser = { ...user };

@@ -34,14 +34,26 @@
                 <td class="px-6 py-4">
                     {{ user.isActive ? 'Yes' : 'No' }}
                 </td>
-                <td class="px-6 py-4">
-                    <button (click)="onEditUser(user)" class="font-medium text-blue-600 dark:text-red-500 hover:underline pl-4">
-                        Edit
+                <td class="px-4 py-4 max-w-xs">
+                    <div class="flex space-x-2">
+                        <button 
+                            (click)="onEditUser(user)" 
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2 py-1 rounded border border-blue-600 dark:border-blue-500">
+                            Edit
+                        </button>
+                        <button 
+                            (click)="onDeleteUser(user.id)" 
+                            class="font-medium text-red-600 dark:text-red-500 hover:underline px-2 py-1 rounded border border-red-600 dark:border-red-500">
+                            Delete
+                        </button>
+                        <button 
+                            *ngIf="currentUserRole === 'admin' && user.role === 'supervisor'" 
+                            (click)="onAssignAgent(user.id)" 
+                            class="font-medium text-green-600 dark:text-green-500 hover:underline px-2 py-1 rounded border border-green-600 dark:border-green-500">
+                            Assign Agent
                     </button>
-                    <button (click)="onDeleteUser(user.id)" class="font-medium text-red-600 dark:text-red-500 hover:underline">
-                        Delete
-                    </button>
-                </td>
+                    </div>
+                </td>                
             </tr>
         </tbody>
     </table>
