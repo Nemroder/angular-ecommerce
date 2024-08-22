@@ -4,4 +4,5 @@ export interface User {
     password: string;
     role: 'admin' | 'supervisor' | 'agente' | 'cliente';
     isActive: boolean;
+    supervisorId?: number;
   }  

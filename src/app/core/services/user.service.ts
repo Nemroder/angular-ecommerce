@@ -61,4 +61,22 @@ export class UserService {
     localStorage.setItem('users', JSON.stringify(storedUsers));
   }
   
+  // ASIGNACION DE SUPERVISOR
+  assignAgent(agentId: number, supervisorId: number): void {
+    const users: User[] = this.getUsers();
+    const agent = users.find(user => user.id === agentId);
+    if (agent) {
+      agent.supervisorId = supervisorId;
+      this.updateUser(agent);
+    }
+  }
+
+  unassignAgent(agentId: number): void {
+    const users: User[] = this.getUsers();
+    const agent = users.find(user => user.id === agentId);
+    if (agent) {
+      agent.supervisorId = undefined;
+      this.updateUser(agent);
+    }
+  }
 }
