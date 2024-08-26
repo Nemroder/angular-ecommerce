@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../../core/services/cart.service';
 import { Product } from '../../../../core/models/product.model';
@@ -11,6 +11,8 @@ import { Product } from '../../../../core/models/product.model';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
+
+  
   cart: Product[] = [];
   total: number = 0;
   hideSideMenu = true;

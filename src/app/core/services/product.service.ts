@@ -17,8 +17,10 @@ export class ProductService {
 
   constructor() {
     const initProducts: Product[] = [
-      { id: this.nextId++, title: 'Pro 1', price: 100, image: 'https://picsum.photos/640/640?r=23', creationAt: new Date().toISOString() },
-      { id: this.nextId++, title: 'Pro 2', price: 100, image: 'https://picsum.photos/640/640?r=12', creationAt: new Date().toISOString() },
+      { id: this.nextId++, title: 'Product 1', price: 100, image: 'https://picsum.photos/640/640?r=1', creationAt: new Date().toISOString() },
+      { id: this.nextId++, title: 'Product 2', price: 200, image: 'https://picsum.photos/640/640?r=2', creationAt: new Date().toISOString() },
+      { id: this.nextId++, title: 'Product 3', price: 50, image: 'https://picsum.photos/640/640?r=3', creationAt: new Date().toISOString() },
+      { id: this.nextId++, title: 'Product 4', price: 10, image: 'https://picsum.photos/640/640?r=4', creationAt: new Date().toISOString() }
     ];
     this.productsSubject.next(initProducts);
   }

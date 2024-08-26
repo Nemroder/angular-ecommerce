@@ -7,6 +7,7 @@ import { HomeComponent } from './features/ecommerce/pages/home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { UserComponent } from './features/ecommerce/pages/user/user.component';
+import { TeamComponent } from './features/ecommerce/pages/team/team.component';
 
 
 export const routes: Routes = [
@@ -24,13 +25,17 @@ export const routes: Routes = [
     },
     {   path: 'home',
         component: HomeComponent, 
-        // canActivate: [AuthGuard, RoleGuard], 
-        // data: { role: 'admin' }
+        // canActivate: [AuthGuard], 
     },
     {   path: 'user',
         component: UserComponent, 
         // canActivate: [AuthGuard, RoleGuard], 
         // data: { role: 'admin' }
+    },
+    {
+        path: 'team',
+        component: TeamComponent, 
+        // canActivate: [AuthGuard], 
     },
     {
         path: '',

@@ -16,7 +16,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 export class NavbarComponent {
   showUserMenu = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
@@ -24,5 +24,6 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout(); // Llama al método de logout del AuthService
+    console.log('funciona');
   }
 }

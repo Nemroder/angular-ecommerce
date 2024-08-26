@@ -20,7 +20,7 @@
     line-height: 80px;
     margin: 0 5px;
   }
-  nav ul li a{
+  .ul-moduls li a{
     color: white;
     font-size: 17px;
     padding: 7px 13px;
@@ -40,6 +40,10 @@
     margin-right: 40px;
     cursor: pointer;
     display: none;
+  }
+  .user-menu {
+    text-transform: uppercase;
+    z-index: 999;
   }
   
   /* #check{

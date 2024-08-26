@@ -9,6 +9,7 @@ import { User } from '../../../../core/models/user.model';
 
 import { UserService } from '../../../../core/services/user.service';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-user',
@@ -32,8 +33,9 @@ export class UserComponent {
 
   constructor(
     private userService: UserService, 
-    private notificationService: NotificationService
-  ) {
+    private notificationService: NotificationService,
+    private cartService: CartService)
+    {
     this.loadUsers();
   }
 

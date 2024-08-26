@@ -19,7 +19,10 @@ export class HomeComponent {
   products: Product[] = [];
   cart: Product[] = [];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(
+    private productService: ProductService, 
+    private cartService: CartService) {
+    }
 
   ngOnInit() {
     this.productService.products$.subscribe((products: Product[]) => {

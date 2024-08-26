@@ -57,4 +57,9 @@ export class AuthService {
   isAuthenticated(): boolean {
     return this.authStatus;
   }
+
+  isSupervisor(): boolean {
+    const user = this.getLoggedUser();
+    return user ? user.role === 'supervisor' : false;
+  }
 }

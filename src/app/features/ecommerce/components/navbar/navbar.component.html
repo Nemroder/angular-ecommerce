@@ -6,7 +6,11 @@
   <ul class="ul-moduls">
     <li><a routerLink="/home" href="#">Home</a></li>
     <li><a routerLink="/user">Users</a></li>
-    <li><a routerLink="/">Services</a></li>
+    
+    <li *ngIf="authService.isSupervisor()">
+      <a routerLink="/team">Team</a>
+    </li>
+
     <li><a href="#">Contact</a></li>
     <li><a href="#">Feedback</a></li>
     <li><a href="#">Feedback</a></li>
@@ -23,12 +27,13 @@
         </svg>
       </button>
       
-      <div class="user-menu absolute right-0 top-12 bg-white rounded shadow-lg w-48 hidden" [class.hidden]="!showUserMenu">
-        <ul>
+      <div class="user-menu absolute right-0 top-12 bg-white rounded shadow-lg w-52 hidden px-2" [class.hidden]="!showUserMenu">
+        <ul class="px-2">
           <li>
-            <a routerLink="/user-management" class="px-4 py-2 text-black hover:bg-blue-600">Gestión de usuario</a>
+            <a routerLink="/user-management" class="text-black hover:bg-blue-600 mt-3 mb-2 border-b pb-2">Gestión de usuario</a>
           </li>
-          <li>
+          
+          <li class="cursor-pointer" (click)="logout()">
             <!-- Otros elementos del navbar -->
             <button (click)="logout()">Logout</button>
 
