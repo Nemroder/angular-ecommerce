@@ -15,17 +15,31 @@ export class AssignAgentModalComponent {
   @Input() supervisorId!: number;
   @Input() agents: User[] = [];
   @Output() close = new EventEmitter<void>();
-  @Output() assign = new EventEmitter<number>();
+  @Output() assign = new EventEmitter<number[]>();
 
-  selectedAgentId?: number;
+  selectedAgentIds: number[] = [];
 
-  constructor(
-    private userService: UserService) {}
+  constructor(private userService: UserService) {}
+
+  isSelected(agentId: number): boolean {
+    return this.selectedAgentIds.includes(agentId);
+  }
+
+  onCheckboxChange(event: Event, agentId: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.checked) {
+      this.selectedAgentIds.push(agentId);
+    } else {
+      this.selectedAgentIds = this.selectedAgentIds.filter(id => id !== agentId);
+    }
+  }
 
   onAssign(): void {
-    if (this.selectedAgentId) {
-      this.userService.assignAgent(this.selectedAgentId, this.supervisorId);
-      this.assign.emit(this.selectedAgentId);
+    if (this.selectedAgentIds.length > 0) {
+      this.selectedAgentIds.forEach(agentId => {
+        this.userService.assignAgent(agentId, this.supervisorId);
+      });
+      this.assign.emit(this.selectedAgentIds);
       this.closeModal();
     }
   }

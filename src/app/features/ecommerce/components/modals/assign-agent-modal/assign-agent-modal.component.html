@@ -1,14 +1,31 @@
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white sm:rounded-lg p-6 dark:bg-gray-800 w-full max-w-md">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Assign Agent</h3>
-      <select [(ngModel)]="selectedAgentId" class="w-full mb-4">
-        <option *ngFor="let agent of agents" [value]="agent.id">
-          {{ agent.username }}
-        </option>
-      </select>
-      <div class="flex justify-end space-x-2">
-        <button (click)="onAssign()" class="px-4 py-2 bg-blue-700 text-white rounded pointer">Assign</button>
-        <button (click)="onClose()" class="px-4 py-2 bg-gray-500 text-white rounded pointer">Cancel</button>
+  <div class="bg-white p-6 sm:rounded-lg dark:bg-gray-800 w-full max-w-md">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Assign Agent</h3>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">Please select an agent to assign to the supervisor:</p>
+    
+    <div class="mb-4">
+      <div *ngFor="let agent of agents" class="flex items-center space-x-3">
+        <input 
+          type="checkbox" 
+          [checked]="isSelected(agent.id)" 
+          (change)="onCheckboxChange($event, agent.id)" 
+          class="form-checkbox text-indigo-600 rounded border-gray-300 shadow-sm focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+        <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{{ agent.username }}</span>
       </div>
     </div>
-  </div>  
+
+    <div class="flex justify-end space-x-2">
+      <button 
+        (click)="onAssign()"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-indigo-700 shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600">
+        Assign
+      </button>
+
+      <button 
+        (click)="onClose()"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
