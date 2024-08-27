@@ -24,6 +24,5 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout(); // Llama al método de logout del AuthService
-    console.log('funciona');
   }
 }

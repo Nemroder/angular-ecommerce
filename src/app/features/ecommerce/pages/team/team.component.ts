@@ -23,14 +23,14 @@ export class TeamComponent {
 
   loadAgents(): void {
     const loggedUser = this.userService.getLoggedUser();
-    console.log('Logged User:', loggedUser);
+    // console.log('Logged User:', loggedUser);
 
     if (loggedUser && loggedUser.role === 'supervisor') {
       const allUsers = this.userService.getUsers();
-      console.log('All Users:', allUsers);
+      // console.log('All Users:', allUsers);
 
       this.agents = allUsers.filter(user => user.supervisorId === loggedUser.id);
-      console.log('Agents:', this.agents);
+      // console.log('Agents:', this.agents);
     }
   }
 

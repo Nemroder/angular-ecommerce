@@ -20,6 +20,14 @@ export class AssignAgentModalComponent {
   selectedAgentIds: number[] = [];
 
   constructor(private userService: UserService) {}
+  
+  ngOnInit() {
+    this.loadAvailableAgents();
+  }
+
+  loadAvailableAgents() {
+    this.agents = this.userService.getAvailableAgents(this.supervisorId);
+  }
 
   isSelected(agentId: number): boolean {
     return this.selectedAgentIds.includes(agentId);

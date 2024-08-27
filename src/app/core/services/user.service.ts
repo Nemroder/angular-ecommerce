@@ -63,13 +63,29 @@ export class UserService {
   
   // ASIGNACION DE SUPERVISOR
   assignAgent(agentId: number, supervisorId: number): void {
-    const users: User[] = this.getUsers();
-    const agent = users.find(user => user.id === agentId);
+    const users = JSON.parse(localStorage.getItem('users') || '[]') as User[];
+    const agent = users.find((user: User) => user.id === agentId);
+    
     if (agent) {
+      // Verifica que el agente no esté asignado a otro supervisor
+      const alreadyAssigned = users.some((user: User) => user.supervisorId === supervisorId && user.role === 'agente');
+      // Desasigna al agente de su supervisor actual
+      const currentSupervisor = users.find((user: User) => user.id === agent.supervisorId && user.role === 'supervisor');
+      if (currentSupervisor) {
+        currentSupervisor.supervisorId = undefined;
+        this.updateUser(currentSupervisor);
+      }
+  
+      // Asigna el agente al nuevo supervisor
       agent.supervisorId = supervisorId;
       this.updateUser(agent);
     }
   }
+  getAvailableAgents(supervisorId: number): User[] {
+    const users = this.getUsers();
+    return users.filter(user => user.role === 'agente' && user.supervisorId === undefined);
+  }
+  
 
   unassignAgent(agentId: number): void {
     const users: User[] = this.getUsers();

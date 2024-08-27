@@ -32,7 +32,6 @@ export class AuthService {
   
       // Redirigir a la página principal
       this.router.navigate(['/home']).then(() => {
-        console.log('Redirección exitosa');
       }).catch(error => {
         console.error('Error en la redirección:', error);
       });

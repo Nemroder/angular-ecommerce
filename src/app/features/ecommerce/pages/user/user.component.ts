@@ -40,11 +40,11 @@ export class UserComponent {
   }
 
    // Cargar usuarios desde el servicio
-  loadUsers(): void {
-    this.users = this.userService.getUsers();
+   loadUsers(): void {
+    this.users = this.userService.getUsers(); // Asegúrate de que esto retorne usuarios
     this.supervisors = this.users.filter(user => user.role === 'supervisor');
     this.agents = this.users.filter(user => user.role === 'agente');
-  }
+  }  
 
   // assign-modal
   openAssignAgentModal(supervisorId: number): void {
@@ -54,16 +54,25 @@ export class UserComponent {
 
   closeAssignAgentModal(): void {
     this.showAssignAgentModal = false;
-    console.log (this.showAssignAgentModal);
   }
 
-  onAssignAgent(agentId: number): void {
+  onAssignAgent(agentIds: number[]): void {
     if (this.supervisorIdToAssign !== null) {
-      this.userService.assignAgent(agentId, this.supervisorIdToAssign);
+      agentIds.forEach(agentId => {
+        this.saveAssignedAgent(agentId);
+        this.userService.assignAgent(agentId, this.supervisorIdToAssign);
+      });
+  
       this.loadUsers();  // Recargamos la lista de usuarios después de la asignación
       this.closeAssignAgentModal();
-      console.log (this.showAssignAgentModal);
+    }
+  }  
 
+  saveAssignedAgent(agentId: number): void {
+    let assignedAgents = JSON.parse(localStorage.getItem('assignedAgents') || '[]');
+    if (!assignedAgents.includes(agentId)) {
+      assignedAgents.push(agentId);
+      localStorage.setItem('assignedAgents', JSON.stringify(assignedAgents));
     }
   }
 
