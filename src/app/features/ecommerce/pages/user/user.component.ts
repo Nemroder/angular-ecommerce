@@ -18,7 +18,7 @@ import { CartService } from '../../../../core/services/cart.service';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
-export class UserComponent {
+export default class UserComponent {
   users: User[] = [];
   supervisors: User[] = [];
   agents: User[] = [];

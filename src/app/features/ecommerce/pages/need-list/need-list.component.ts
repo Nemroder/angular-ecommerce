@@ -15,7 +15,7 @@ import { AddNeedComponent } from '../../components/add-need/add-need.component';
   templateUrl: './need-list.component.html',
   styleUrl: './need-list.component.css'
 })
-export class NeedListComponent {
+export default class NeedListComponent {
   needs: Need[] = [];
 
   constructor(private needService: NeedService) {}

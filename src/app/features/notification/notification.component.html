@@ -1,3 +1,5 @@
-<div *ngFor="let notification of notifications$ | async" [ngClass]="getNotificationClasses(notification)">
-    {{ notification.text }}
+<div class="notificacion-container">
+  <div *ngFor="let notification of notifications$ | async" [ngClass]="getNotificationClasses(notification)">
+      {{ notification.text }}
   </div>
+</div>

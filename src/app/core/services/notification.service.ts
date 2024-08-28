@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Notification {
   type: string;
-  position: string;
   text: string;
 }
 
@@ -16,14 +15,14 @@ export class NotificationService {
 
   constructor() {}
 
-  addNotification(notification: Notification, duration: number = 3000): void {
-    const currentNotifications = this.notificationsSubject.value;
-    const updatedNotifications = [...currentNotifications, notification];
+  addNotification(notification: Notification, duration: number = 5000): void {
+    // Reemplazar cualquier notificación existente con la nueva
+    const updatedNotifications = [notification];
     this.notificationsSubject.next(updatedNotifications);
 
     // Remover la notificación después de un tiempo
     setTimeout(() => {
-      this.removeNotification(notification);
+      this.clearNotifications();
     }, duration);
   }
 

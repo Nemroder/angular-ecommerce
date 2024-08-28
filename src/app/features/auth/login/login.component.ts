@@ -15,7 +15,7 @@ import { NotificationService, Notification } from '../../../core/services/notifi
   styleUrls: ['./login.component.css'],
   standalone: true,
 })
-export class LoginComponent {
+export default class LoginComponent {
   username: string = '';
   password: string = '';
   rememberMe: boolean = false;
@@ -31,11 +31,15 @@ export class LoginComponent {
     this.notifications$ = this.notificationService.getNotifications(); // Obtener las notificaciones
   }
 
+  ngOnInit() {
+    // Limpiar notificaciones previas al cargar el componente
+    this.notificationService.clearNotifications();
+  }
+
   login() {
     if (!this.username.trim() || !this.password.trim()) {
       this.notificationService.addNotification({
         type: 'error',
-        position: 'left',
         text: 'Please complete all fields.',
       });
       return;
@@ -45,7 +49,6 @@ export class LoginComponent {
     if (error) {
       this.notificationService.addNotification({
         type: 'error',
-        position: 'top',
         text: error,
       });
     } else {

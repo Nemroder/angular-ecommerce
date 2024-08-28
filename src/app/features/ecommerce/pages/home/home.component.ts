@@ -15,7 +15,7 @@ import { ProductService } from '../../../../core/services/product.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export default class HomeComponent {
   products: Product[] = [];
   cart: Product[] = [];
 

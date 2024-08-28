@@ -1,47 +1,36 @@
 import { Routes } from '@angular/router';
-
-import { LoginComponent } from './features/auth/login/login.component';
-import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
-import { NavbarComponent } from './features/ecommerce/components/navbar/navbar.component';
-import { HomeComponent } from './features/ecommerce/pages/home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
-import { UserComponent } from './features/ecommerce/pages/user/user.component';
-import { TeamComponent } from './features/ecommerce/pages/team/team.component';
-import { NeedListComponent } from './features/ecommerce/pages/need-list/need-list.component';
+
 
 
 export const routes: Routes = [
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent:() => import('./features/auth/login/login.component')
     },
     {
         path: 'sign-up',
-        component: SignUpComponent
-    },
-    {
-        path: 'navbar',
-        component: NavbarComponent
+        loadComponent:() => import('./features/auth/sign-up/sign-up.component')
     },
     {   path: 'home',
-        component: HomeComponent, 
-        // canActivate: [AuthGuard], 
+        loadComponent:() => import('./features/ecommerce/pages/home/home.component'),
+        canActivate: [AuthGuard], 
     },
     {   path: 'users',
-        component: UserComponent, 
-        // canActivate: [AuthGuard, RoleGuard], 
+        loadComponent:() => import('./features/ecommerce/pages/user/user.component'),
+        // canActivate: [AuthGuard], 
         // data: { role: 'admin' }
     },
     {
         path: 'team',
-        component: TeamComponent, 
-        // canActivate: [AuthGuard], 
+        loadComponent:() => import('./features/ecommerce/pages/team/team.component'),
+        canActivate: [AuthGuard], 
     },
     {
         path: 'needs',
-        component: NeedListComponent, 
-        // canActivate: [AuthGuard], 
+        loadComponent:() => import('./features/ecommerce/pages/need-list/need-list.component'),
+        canActivate: [AuthGuard], 
     },
     {
         path: '',
@@ -50,6 +39,6 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'home'
+        redirectTo: 'login'
     }
 ];

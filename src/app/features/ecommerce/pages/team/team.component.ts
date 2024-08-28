@@ -12,7 +12,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   templateUrl: './team.component.html',
   styleUrl: './team.component.css'
 })
-export class TeamComponent {
+export default class TeamComponent {
   agents: User[] = [];
 
   constructor(private userService: UserService) {}

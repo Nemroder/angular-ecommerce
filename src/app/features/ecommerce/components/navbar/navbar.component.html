@@ -5,9 +5,10 @@
   <label class="logo">YardSale</label>
   <ul class="ul-moduls">
     <li><a routerLink="/home" href="#">Home</a></li>
-    <li><a routerLink="/users">Users</a></li>
-    
-    <!-- <li *ngIf="authService.isSupervisor()"> -->
+
+    <li>
+      <a routerLink="/users">Users</a>
+    </li>
 
     <li *ngIf="authService.isSupervisor()">
         <a routerLink="/team">Team</a>

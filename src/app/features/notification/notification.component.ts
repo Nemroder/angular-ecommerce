@@ -1,8 +1,6 @@
 // notification.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-
 
 import { NotificationService, Notification } from '../../core/services/notification.service';
 import { Observable } from 'rxjs';
@@ -28,10 +26,6 @@ export class NotificationComponent implements OnInit {
       'notification-success': notification.type === 'success',
       'notification-error': notification.type === 'error',
       'notification-info': notification.type === 'info',
-      'notification-top': notification.position === 'top',
-      'notification-bottom': notification.position === 'bottom',
-      'notification-left': notification.position === 'left',
-      'notification-right': notification.position === 'right',
     };
   }
 }
