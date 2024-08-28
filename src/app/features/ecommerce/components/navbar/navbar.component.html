@@ -5,7 +5,7 @@
   <label class="logo">YardSale</label>
   <ul class="ul-moduls">
     <li><a routerLink="/home" href="#">Home</a></li>
-    <li><a routerLink="/user">Users</a></li>
+    <li><a routerLink="/users">Users</a></li>
     
     <!-- <li *ngIf="authService.isSupervisor()"> -->
 
@@ -13,8 +13,10 @@
         <a routerLink="/team">Team</a>
     </li>
 
-    <li><a href="#">Contact</a></li>
-    <li><a href="#">Feedback</a></li>
+    <li *ngIf="authService.isClient()">
+      <a routerLink="/needs">Needs</a>
+    </li>
+
     <li><a href="#">Feedback</a></li>
   </ul>
 

@@ -61,4 +61,9 @@ export class AuthService {
     const user = this.getLoggedUser();
     return user ? user.role === 'supervisor' : false;
   }
+
+  isClient(): boolean {
+    const user = this.getLoggedUser();
+    return user ? user.role === 'cliente' : false;
+  }
 }
